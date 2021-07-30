@@ -1,7 +1,7 @@
 RegisterServerEvent('fuel:getPlayerMoney')
 AddEventHandler('fuel:getPlayerMoney', function(source)
 	function getMoney(source, callback)
-	    local steam = exports.SQLquerries:steamID(source)
+	    local steam = steamID(source)
 	    MySQL.Async.fetchAll("SELECT money FROM users WHERE identifier = @identifier", 
 				{['@identifier'] = steam },
 			    function(result)
@@ -22,7 +22,7 @@ RegisterServerEvent('fuel:setPlayerMoney')
 AddEventHandler('fuel:setPlayerMoney', function(source, money)
 	local amount = Round(money)
 	function setMoney(source, bool, amount)
-		local steam = exports.SQLquerries:steamID(source)
+		local steam = steamID(source)
 		local diff
 		if bool then
 			diff = amount
@@ -45,3 +45,14 @@ function Round(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
+
+function steamID(source)
+    for k,v in pairs(GetPlayerIdentifiers(source))do
+        if string.sub(v, 1, string.len("steam:")) == "steam:" then
+            steamId = v
+        end
+        break
+    end
+    return steamId
+end
+
