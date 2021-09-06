@@ -32,13 +32,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `identifier`, `firstname`, `lastname`, `money`) VALUES
-(1, 'steam:ID', 'PrénomRP', 'NomRP', 0);
-
---
 -- Index pour les tables déchargées
 --
 
